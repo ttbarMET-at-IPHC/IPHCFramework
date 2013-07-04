@@ -2739,6 +2739,12 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
                                         PFJetIDSelectionFunctor::TIGHT);
 
   #ifdef ALEX_ERIC_CARO
+
+     edm::Handle<edm::ValueMap<float> >  QGTagsHandleMLP;
+     edm::Handle<edm::ValueMap<float> >  QGTagsHandleLikelihood;
+     iEvent.getByLabel("QGTagger","qgMLP", QGTagsHandleMLP);
+     iEvent.getByLabel("QGTagger","qgLikelihood", QGTagsHandleLikelihood);
+
       edm::Handle<edm::ValueMap<float> > puJetIdMVA5x;
       iEvent.getByLabel(edm::InputTag("puJetMva:full5xDiscriminant"),puJetIdMVA5x);
 
@@ -2865,6 +2871,18 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
          //shoud we fill other values ?
          myjet->subjets.push_back(subjet);
        }
+
+       // Subjetinness infos
+       others["tau1"] = patJet->userFloat("tau1");
+       others["tau2"] = patJet->userFloat("tau2");
+       others["tau3"] = patJet->userFloat("tau3");
+    }
+    else
+    {
+       // Subjetinness infos
+       others["tau1"] = -1;
+       others["tau2"] = -1;
+       others["tau3"] = -1;
     }
 
     // ---- Looking for the constituents (pf or calo) ----
@@ -3069,6 +3087,15 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
        ids["PU_IDLoose53x"] = isMedium53x;
        ids["PU_IDLoose53x"] = isTight53x;
 
+       // Quark-gluon tagger
+       edm::RefToBase<pat::Jet> jetRef(jetViewer,(size_t)ijet);
+       float MLP = -99999;
+       float Lik = -99999;
+       if (QGTagsHandleMLP.isValid()) MLP =  (*QGTagsHandleMLP)[jetRef];
+       if (QGTagsHandleLikelihood.isValid()) Lik = (*QGTagsHandleLikelihood)[jetRef];
+       others["GT_MLP"] = MLP;
+       others["GT_Lik"] = Lik;
+       
        ijet++;
      }
      else
@@ -3085,6 +3112,9 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
        ids["PU_IDLoose53x"] = 0.0;
        ids["PU_IDLoose53x"] = 0.0;
        ids["PU_IDLoose53x"] = 0.0;
+
+       others["GT_MLP"] = -99999;
+       others["GT_Lik"] = -99999;
      }
 
         bool looseId_Jacob = true;
