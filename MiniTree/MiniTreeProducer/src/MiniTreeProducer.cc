@@ -3074,8 +3074,8 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
 
        ids["PU_IDflag5x"]  = idflag5x;
        ids["PU_IDLoose5x"] = isLoose5x;
-       ids["PU_IDLoose5x"] = isMedium5x;
-       ids["PU_IDLoose5x"] = isTight5x;
+       ids["PU_IDMedium5x"] = isMedium5x;
+       ids["PU_IDTight5x"] = isTight5x;
        
        int  idflag53x   = (*(puJetIdFlag53x))[jetViewer->refAt(ijet)];
        bool isLoose53x  = PileupJetIdentifier::passJetId( idflag53x, PileupJetIdentifier::kLoose );
@@ -3084,8 +3084,8 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
 
        ids["PU_IDflag53x"]  = idflag53x;
        ids["PU_IDLoose53x"] = isLoose53x;
-       ids["PU_IDLoose53x"] = isMedium53x;
-       ids["PU_IDLoose53x"] = isTight53x;
+       ids["PU_IDMedium53x"] = isMedium53x;
+       ids["PU_IDTight53x"] = isTight53x;
 
        // Quark-gluon tagger
        edm::RefToBase<pat::Jet> jetRef(jetViewer,(size_t)ijet);
