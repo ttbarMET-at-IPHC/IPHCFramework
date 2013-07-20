@@ -3102,13 +3102,13 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
        
        ids["PU_IDflag5x"]  = 0.0;
        ids["PU_IDLoose5x"] = 0.0;
-       ids["PU_IDLoose5x"] = 0.0;
-       ids["PU_IDLoose5x"] = 0.0;
+       ids["PU_IDMedium5x"] = 0.0;
+       ids["PU_IDTight5x"] = 0.0;
        
        ids["PU_IDflag53x"]  = 0.0;
        ids["PU_IDLoose53x"] = 0.0;
-       ids["PU_IDLoose53x"] = 0.0;
-       ids["PU_IDLoose53x"] = 0.0;
+       ids["PU_IDMedium53x"] = 0.0;
+       ids["PU_IDTight53x"] = 0.0;
 
        others["GT_MLP"] = -99999;
        others["GT_Lik"] = -99999;
