@@ -175,7 +175,7 @@ void NTupleProducer::endLuminosityBlock(edm::LuminosityBlock const& lumi, edm::E
     numberOfEventsBeforeMTSkimmer->Fill(1,nEventsProcessedForLumi->value);
     numberOfEventsBeforeMTSkimmer->SetEntries(
                             numberOfEventsBeforeMTSkimmer->GetEntries()
-                           +nEventsProcessedForLumi->value);
+                           +nEventsProcessedForLumi->value-1);
 
 }
 
