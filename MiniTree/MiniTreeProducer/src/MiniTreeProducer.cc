@@ -2808,9 +2808,6 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
       if (cfg.isData) others["corr_L2L3Residual"] = patJet->jecFactor("L2L3Residual");
      #endif
 
-      // Saving others
-      myjet->others.Fill(others);
-
     double scale = patJet->jecFactor("Uncorrected");     
     myjet->scale  = scale;
 
@@ -3105,13 +3102,13 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
        
        ids["PU_IDflag5x"]  = 0.0;
        ids["PU_IDLoose5x"] = 0.0;
-       ids["PU_IDLoose5x"] = 0.0;
-       ids["PU_IDLoose5x"] = 0.0;
+       ids["PU_IDMedium5x"] = 0.0;
+       ids["PU_IDTight5x"] = 0.0;
        
        ids["PU_IDflag53x"]  = 0.0;
        ids["PU_IDLoose53x"] = 0.0;
-       ids["PU_IDLoose53x"] = 0.0;
-       ids["PU_IDLoose53x"] = 0.0;
+       ids["PU_IDMedium53x"] = 0.0;
+       ids["PU_IDTight53x"] = 0.0;
 
        others["GT_MLP"] = -99999;
        others["GT_Lik"] = -99999;
@@ -3142,6 +3139,9 @@ void MiniTreeProducer::fillJetMET(edm::Event& iEvent,
 
     // Saving ids
     myjet->ID.Fill(ids);
+
+    // Saving others
+    myjet->others.Fill(others);
 
     // --------------------- HLT-object matching -----------------------
     if (cfg.doTrigger)
